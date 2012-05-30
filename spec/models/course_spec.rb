@@ -44,7 +44,7 @@ describe "Course" do
     course = FactoryGirl.create(:course)
     Course.first.enrolment_types.size.should == 0
     user = FactoryGirl.create(:user)
-    enrolment = Enrolment.new(:user => user)
+    enrolment = Enrolment.new(:userid => user.id)
     course.add_enrolment(enrolment)
     course_from_db = Course.first
     course_from_db.enrolment_types.size.should == 1

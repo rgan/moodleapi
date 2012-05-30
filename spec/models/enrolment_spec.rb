@@ -31,4 +31,19 @@ describe 'enrolment' do
     Enrolment.create(:enrolment_type => enrolment_type, :user => FactoryGirl.create(:user))
     User.first.courses.should == [course]
   end
+
+  it "should return url" do
+    course = FactoryGirl.create(:course)
+    enrolment_type = FactoryGirl.create(:manual_enrolment_type, :course => course)
+    enrolment = Enrolment.create(:enrolment_type => enrolment_type, :user => FactoryGirl.create(:user))
+    enrolment.url.should == "/courses/#{course.id}/enrolments/#{enrolment.id}"
+  end
+
+  it "should create enrolment from json" do
+    enrolment = Enrolment.parse_json('{"userid" : "1", "status" : "0", "timestart" : "2", "timeend" : "3"}')
+    enrolment.userid.should == 1
+    enrolment.status.should == 0
+    enrolment.timestart.should == 2
+    enrolment.timeend.should == 3
+  end
 end
