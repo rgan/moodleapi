@@ -24,4 +24,16 @@ describe "Course" do
       course.should_not be_valid
     end
   end
+
+  it "should create a course from json" do
+    course = Course.parse_json('{"id":1,"fullname":"Test University","shortname":"TestUniv","summary":"summary"}')
+    course.fullname.should == "Test University"
+    course.shortname.should == "TestUniv"
+    course.summary.should == "summary"
+  end
+
+  it "should return url" do
+    course = FactoryGirl.create(:course)
+    course.url.should == "/courses/#{course.id}"
+  end
 end
