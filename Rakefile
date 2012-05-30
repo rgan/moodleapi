@@ -23,5 +23,5 @@ end
 
 desc 'run specs'
 task :spec do
-  sh "rspec #{Dir.glob(File.join("**", "spec", "*_spec.rb")).join(" ")}"
+  sh "rspec #{Dir.glob(File.join("spec", "**", "*_spec.rb")).join(" ")}"
 end

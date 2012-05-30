@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'datamapper', '~> 1.2.0'
 gem 'dm-mysql-adapter', '~> 1.2.0'
 gem 'sinatra'
+gem 'thin', '1.3.1'
 
 group :test do
   gem 'rspec', '~> 2.6.0'
