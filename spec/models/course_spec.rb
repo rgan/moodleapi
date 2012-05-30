@@ -3,7 +3,10 @@ require 'spec_helper'
 describe "Course" do
 
   before(:each) do
+    Enrolment.all.destroy
+    EnrolmentType.all.destroy
     Course.all.destroy
+    User.all.destroy
   end
 
   it "should create a course" do
@@ -35,5 +38,17 @@ describe "Course" do
   it "should return url" do
     course = FactoryGirl.create(:course)
     course.url.should == "/courses/#{course.id}"
+  end
+
+  it "should add an enrolment to manual enrolment type" do
+    course = FactoryGirl.create(:course)
+    Course.first.enrolment_types.size.should == 0
+    user = FactoryGirl.create(:user)
+    enrolment = Enrolment.new(:user => user)
+    course.add_enrolment(enrolment)
+    course_from_db = Course.first
+    course_from_db.enrolment_types.size.should == 1
+    course_from_db.enrolment_types.first.enrol_type.should == "manual"
+    course_from_db.enrolments.first.user.should == user
   end
 end

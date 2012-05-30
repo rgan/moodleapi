@@ -16,6 +16,11 @@ class Course
     enrolment_types.collect { |enrolment_type| enrolment_type.enrolments }.flatten
   end
 
+  def add_enrolment(enrolment)
+    manual_enrolment_type.enrolments << enrolment
+    raise "Could not save" unless save
+  end
+
   def url
     "/courses/#{self.id}"
   end
@@ -23,5 +28,16 @@ class Course
   def self.parse_json(json)
     json = JSON.parse(json)
     Course.new(:fullname => json['fullname'], :shortname => json['shortname'], :summary => json['summary'])
+  end
+
+  private
+
+  def manual_enrolment_type
+    manual_enrolment_type = enrolment_types.select { | enrolment_type| enrolment_type.enrol_type == 'manual'}.first
+    if manual_enrolment_type.nil?
+      manual_enrolment_type = EnrolmentType.create(:enrol_type => "manual", :course => self)
+      enrolment_types << manual_enrolment_type
+    end
+    manual_enrolment_type
   end
 end

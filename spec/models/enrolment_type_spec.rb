@@ -3,8 +3,10 @@ require 'spec_helper'
 describe 'enrolment_type' do
 
   before(:each) do
-    EnrolmentType.all.destroy()
-    Course.all.destroy()
+    Enrolment.all.destroy
+    EnrolmentType.all.destroy
+    Course.all.destroy
+    User.all.destroy
   end
 
   it "should be associated with a course" do
