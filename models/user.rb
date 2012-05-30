@@ -17,4 +17,8 @@ class User
   def courses
      enrolments.collect { | enrolment| enrolment.enrolment_type.course }
   end
+
+  def url
+    "/users/#{self.id}"
+  end
 end

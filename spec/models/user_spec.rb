@@ -24,4 +24,10 @@ describe "user" do
       user.should_not be_valid
     end
   end
+
+  it "should return url" do
+    user = FactoryGirl.build(:user)
+    user.id = 1
+    user.url.should == "/users/1"
+  end
 end
