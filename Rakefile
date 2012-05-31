@@ -1,3 +1,15 @@
+begin
+  require 'vlad'
+  Vlad.load(:app => nil, :scm => "git")
+rescue LoadError
+  puts "Error loading Vlad"
+end
+
+desc 'vlad:deploy'
+task "vlad:deploy" => %w[
+  vlad:update vlad:bundle:install vlad:start_app vlad:cleanup
+]
+
 namespace :db do
 
   namespace :test do
