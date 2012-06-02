@@ -5,6 +5,9 @@
 
 function UsersCtrl($scope, User) {
 	$scope.users = User.all();
+	$scope.save = function(user) {
+	    User.save(angular.copy(user), function() { $scope.status = 'Saved'}, function() {$scope.status = 'Error'});
+	};
 }
 UsersCtrl.$inject = ['$scope', 'User'];
 
