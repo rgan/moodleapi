@@ -25,22 +25,37 @@ describe('UsersCtrl', function(){
 });
 
 describe('CoursesCtrl', function(){
-  var scope, ctrl, $httpBackend;
+  var $httpBackend, scope, $controller;
+  
+  beforeEach(inject(function(_$httpBackend_, $rootScope, _$controller_) {
+    $httpBackend = _$httpBackend_;
+	$controller = _$controller_;
+	scope = $rootScope.$new();
+  }));
 
-  beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
-      $httpBackend = _$httpBackend_;
-      $httpBackend.expectGET('/courses').
-          respond([{fullname: 'Foo'}]);
-
-      scope = $rootScope.$new();
-      ctrl = $controller(CoursesCtrl, {$scope: scope});
-    }));
-
+  afterEach(function() {
+     $httpBackend.verifyNoOutstandingExpectation();
+     $httpBackend.verifyNoOutstandingRequest();
+   });
+	
   it('should invoke service to get all courses', function() {
+	$httpBackend.expectGET('/courses').respond([{fullname: 'Foo'}]);
+	var controller = $controller(CoursesCtrl, {$scope: scope});
 	expect(scope.courses).toEqual([]);
 	$httpBackend.flush();	
     expect(scope.courses.length).toBe(1);
   });
+
+  it('should invoke service to save course', function() {
+	var courseJson = {fullname : "foo"};
+	$httpBackend.expectGET('/courses').respond([]);
+	var controller = $controller(CoursesCtrl, {$scope: scope});
+	$httpBackend.flush();
+	
+	$httpBackend.expectPOST('/courses', courseJson).respond(201, '')
+	scope.save(courseJson);
+	$httpBackend.flush();
+	});
 });
 
 });
