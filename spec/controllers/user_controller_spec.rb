@@ -19,12 +19,12 @@ describe "user controller" do
   describe "POST /users" do
     it "should return 401 if data is not valid" do
       post "/users", ""
-      last_response.status.should == 401
+      last_response.status.should == 400
     end
 
     it "should return 401 if required fields are absent" do
       post "/users", '{"username":"foo"}'
-      last_response.status.should == 401
+      last_response.status.should == 400
     end
 
     it "should save user if valid" do

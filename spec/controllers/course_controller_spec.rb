@@ -19,12 +19,12 @@ describe "course controller" do
   describe "POST /courses" do
     it "should return 401 if data is not valid" do
       post "/courses", ""
-      last_response.status.should == 401
+      last_response.status.should == 400
     end
 
     it "should return 401 if required fields are absent" do
       post "/courses", '{"fullname":"foo", "shortname":""}'
-      last_response.status.should == 401
+      last_response.status.should == 400
       last_response.body.should == "[\"Shortname must not be blank\", \"Shortname must be between 1 and 255 characters long\"]"
     end
 
