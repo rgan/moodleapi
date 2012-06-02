@@ -30,4 +30,9 @@ describe "user" do
     user.id = 1
     user.url.should == "/users/1"
   end
+
+  it "should create a user from json" do
+    user = User.parse_json('{ "username" : "username"}')
+    user.username.should == "username"
+  end
 end

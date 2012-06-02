@@ -21,4 +21,10 @@ class User
   def url
     "/users/#{self.id}"
   end
+
+  def self.parse_json(json)
+    json = JSON.parse(json)
+    User.new(:username => json['username'], :password => json['password'], :email => json['email'],
+             :first_name => json['first_name'], :last_name => json['last_name'])
+  end
 end
