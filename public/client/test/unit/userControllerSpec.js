@@ -1,3 +1,5 @@
+'use strict';
+
 describe('UsersCtrl', function(){
   var scope, ctrl, $httpBackend;
 
@@ -12,6 +14,11 @@ describe('UsersCtrl', function(){
       ctrl = $controller(UsersCtrl, {$scope: scope});
     }));
 
+  afterEach(function() {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
+  });
+	
   it('should invoke service to get all users', function() {
 	expect(scope.users).toEqual([]);
 	$httpBackend.flush();	
@@ -19,7 +26,7 @@ describe('UsersCtrl', function(){
   });
 
  it('should invoke service to save user', function() {
-	userJson = {username: "foo"}
+	var userJson = {username: "foo"}
 	
 	$httpBackend.flush();	
 	$httpBackend.expectPOST('/users', userJson).respond(201, '')

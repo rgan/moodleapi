@@ -17,3 +17,13 @@ serviceModule.factory('Course', function($resource){
 	save: {method:'POST'}
   });
 });
+
+serviceModule.factory('Enrolment', function($resource){
+  return $resource('/courses/:courseId/enrolments', {}, {
+    all: {method:'GET', params:{}, isArray:true},
+	save: {method:'POST'}
+  });
+});
+
+
+

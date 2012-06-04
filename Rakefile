@@ -37,3 +37,13 @@ desc 'run specs'
 task :spec do
   sh "rspec #{Dir.glob(File.join("spec", "**", "*_spec.rb")).join(" ")}"
 end
+
+# start_chrome.sh: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --new-window --user-data-dir=/tmp
+#JSTESTDRIVER_JAR = "public/client/test/lib/jstestdriver/JsTestDriver.jar"
+#namespace :jasmine do
+
+#  desc 'start server'
+#  task :start_server do
+#    sh "java -jar #{JSTESTDRIVER_JAR} --port 9876 --browser './start_chrome.sh'" #--runnerMode DEBUG
+#  end
+#end

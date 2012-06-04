@@ -6,5 +6,6 @@ angular.module('moodleApp', ['moodleApp.services']).
     $routeProvider.when('/courses', {template: 'partials/courses.html', controller: CoursesCtrl});
     $routeProvider.when('/courses/add', {template: 'partials/addCourse.html', controller: CoursesCtrl});
     $routeProvider.when('/users/add', {template: 'partials/addUser.html', controller: UsersCtrl});
+    $routeProvider.when('/courses/:courseId/:courseName', {template: 'partials/enrolments.html', controller: EnrolmentsCtrl});
     $routeProvider.otherwise({redirectTo: '/users'});
   }]);

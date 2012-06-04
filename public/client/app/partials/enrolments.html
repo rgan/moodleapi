@@ -1,0 +1,13 @@
+<p>Enrolments in Course: {{courseName}}</p>
+
+{{ status }}
+<form novalidate class="simple-form">
+	Select a user to enrol:<select ng-model="user" ng-options="u.last_name for u in users"></select><br>
+	<button ng-click="enrol(user.id)">ENROL</button>
+</form>
+
+<ul>
+    <li ng-repeat="enrolment in enrolments">
+      {{enrolment.first_name + " " + enrolment.last_name}}
+    </li>
+</ul>
