@@ -15,13 +15,14 @@ describe "course controller" do
     end
 
     it "should return enrolments" do
-      course = FactoryGirl.build(:course_with_enrolments)
+      course = FactoryGirl.create(:course_with_enrolments)
       Course.should_receive(:get).with(1).and_return(course)
       get "/courses/1/enrolments"
       last_response.status.should == 200
       last_response.headers["Content-Type"].should == "application/json;charset=utf-8"
-      last_response.body.should == course.enrolments.to_json
+      last_response.body.should == course.enrolled_users.to_json
     end
+
   end
 
   describe "POST /courses/:id/enrolments" do

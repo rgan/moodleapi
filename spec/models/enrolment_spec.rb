@@ -25,6 +25,13 @@ describe 'enrolment' do
     Course.first.enrolments.should == [enrolment, second_enrolment]
   end
 
+  it "should return enrolled users for a course" do
+    user = FactoryGirl.create(:user)
+    enrolment_type = FactoryGirl.create(:manual_enrolment_type, :course => FactoryGirl.create(:course))
+    enrolment = Enrolment.create(:enrolment_type => enrolment_type, :user => user)
+    Course.first.enrolled_users.should == [user]
+  end
+
   it "should return courses for a user" do
     course = FactoryGirl.create(:course)
     enrolment_type = FactoryGirl.create(:manual_enrolment_type, :course => course)

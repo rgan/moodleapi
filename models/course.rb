@@ -16,6 +16,10 @@ class Course
     enrolment_types.collect { |enrolment_type| enrolment_type.enrolments }.flatten
   end
 
+  def enrolled_users
+    enrolment_types.collect { |enrolment_type| enrolment_type.users }.flatten
+  end
+
   def add_enrolment(enrolment)
     manual_enrolment_type.enrolments << enrolment
     raise "Could not save" unless save

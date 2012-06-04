@@ -13,4 +13,6 @@ class EnrolmentType
 
   has n, :enrolments, :child_key => 'enrolid'
 
+  has n, :users, :through => :enrolments
+
 end
